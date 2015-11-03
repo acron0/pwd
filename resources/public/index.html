@@ -11,20 +11,20 @@
   </head>
   <body>
     <div id='ctrl'>
-        <div> 
+        <div>
             <input id='seed' value="{{ seed }}"></input>
         </div>
-        <div> 
+        <div>
             <input id='password' type="password"></input>
         </div>
         <div>
-            <button>Go</button>
+            <button id='button'>Go</button>
         </div>
     </div>
-    <div> 
+    <div>
         <span id='result'></span><br/>
     </div>
-    
+
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script>
         // seedrandom.js version 2.3.1
@@ -39,7 +39,7 @@
         //
         // Basic usage:
         //
-        // 
+        //
         //
         //   Math.seedrandom('yay.');  // Sets Math.random to a function that is
         //                             // initialized using the given explicit seed.
@@ -369,11 +369,11 @@
     </script>
     <script>
     $( document ).ready(function() {
-  
+
         function genPass() {
             var site = $('#seed').val();
             var pw = $('#password').val();
-    
+
             var printable = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;'.split('')
             var seed = (site+pw).split('').map(function(a){return a.charCodeAt().toString()}).reduce(function(x,y){return x+y});
             Math.seedrandom(seed);
@@ -381,8 +381,8 @@
 	        var count = 20;
             for(var i = 0; i < count; ++i) {
 		      newpass += printable[Math.floor(Math.random() * printable.length)];
-            }                    
-            $('#result').text(newpass);  
+            }
+            $('#result').text(newpass);
             $('#ctrl').remove();
         }
 
@@ -407,4 +407,3 @@
     });
     </script>
   </body>
-
