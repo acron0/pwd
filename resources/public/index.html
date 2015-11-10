@@ -19,6 +19,7 @@
         </div>
         <div>
             <button id='button'>Go</button>
+            <input type="checkbox" id='reduced'></input>
         </div>
     </div>
     <div>
@@ -371,16 +372,17 @@
     $( document ).ready(function() {
 
         function genPass() {
+            var reduced = $("#reduced").prop('checked')
             var site = $('#seed').val();
             var pw = $('#password').val();
-
             var printable = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;'.split('')
+            if(reduced) {printable.splice(62);}
             var seed = (site+pw).split('').map(function(a){return a.charCodeAt().toString()}).reduce(function(x,y){return x+y});
             Math.seedrandom(seed);
             var newpass = '';
-	        var count = 20;
+            var count = 20;
             for(var i = 0; i < count; ++i) {
-		      newpass += printable[Math.floor(Math.random() * printable.length)];
+              newpass += printable[Math.floor(Math.random() * printable.length)];
             }
             $('#result').text(newpass);
             $('#ctrl').remove();
@@ -392,7 +394,7 @@
         });
 
         // capture enter
-        $( "#password" ).keypress(function( event ) {
+        $("#password" ).keypress(function( event ) {
             if(event.which == 13 ){
                 genPass();
             }
